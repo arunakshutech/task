@@ -1,0 +1,68 @@
+{
+  "project_info": {
+    "project_number": "669558761572",
+    "project_id": "missme-a318f",
+    "storage_bucket": "missme-a318f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:669558761572:android:6728497c5a6f09b99a1771",
+        "android_client_info": {
+          "package_name": "com.example.task"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "669558761572-cnjdhjcn5t8578sid5p0g7bk0keoprf9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCTh5c2Mk5TUuKDvG81m71lX0SR7WScsn4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "669558761572-cnjdhjcn5t8578sid5p0g7bk0keoprf9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:669558761572:android:ad542e5ecb2e29879a1771",
+        "android_client_info": {
+          "package_name": "com.miss.me"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "669558761572-cnjdhjcn5t8578sid5p0g7bk0keoprf9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCTh5c2Mk5TUuKDvG81m71lX0SR7WScsn4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "669558761572-cnjdhjcn5t8578sid5p0g7bk0keoprf9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
