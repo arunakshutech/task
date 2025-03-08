@@ -29,6 +29,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     final taskProvider = Provider.of<TaskProvider>(context);
    
+    double screenWidth = MediaQuery.of(context).size.width;
 
     return Scaffold(
       appBar: AppBar(
@@ -69,24 +70,30 @@ class _HomeScreenState extends State<HomeScreen> {
       drawer: _buildSidebar(context),
       body: Column(
         children: [
-          Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: ElevatedButton(
-              onPressed: () {
-                Navigator.pushNamed(context, '/add_task');
-              },
-              style: ElevatedButton.styleFrom(
-                padding: EdgeInsets.symmetric(vertical: 15),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10.0),
+          Row(
+
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: ElevatedButton(
+                  onPressed: () {
+                    Navigator.pushNamed(context, '/add_task');
+                  },
+                  style: ElevatedButton.styleFrom(
+                    padding: EdgeInsets.symmetric(vertical: 15),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10.0),
+                    ),
+                    backgroundColor: Colors.blue.shade600,
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text('Add Task', style: TextStyle(color: Colors.white)),
+                  ),
                 ),
-                backgroundColor: Colors.blue.shade600,
               ),
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Text('Add Task', style: TextStyle(color: Colors.white)),
-              ),
-            ),
+            ],
           ),
           // Dashboard
           Expanded(
@@ -98,7 +105,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
                 headingTextStyle: TextStyle(color: Colors.white),
                 dividerThickness: 4,
-                columnSpacing: 42,
+                columnSpacing: screenWidth/35,
                 columns: [
                   DataColumn(
                     label: Text(
@@ -306,14 +313,13 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
     );
   }
-
   // Show client details popup
   void _showClientDetails(
     BuildContext context,
     String clientName,
     String designation,
     String email,
-  ) {
+  ){
     showDialog(
       context: context,
       builder: (context) {
@@ -354,4 +360,6 @@ class _HomeScreenState extends State<HomeScreen> {
       },
     );
   }
+
+
 }

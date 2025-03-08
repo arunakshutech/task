@@ -122,167 +122,222 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Add Task'),
+        title: Text(
+          'Add Task',
+          style: TextStyle(color: Colors.white),
+        ),
+        backgroundColor: Colors.blue.shade700,
+        iconTheme: IconThemeData(color: Colors.white),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Form(
-          key: _formKey,
-          child: SingleChildScrollView(
-            child: Column(
-              children: [
-                // Task Name
-                TextFormField(
-                  controller: _nameController,
-                  decoration: InputDecoration(
-                    labelText: 'Task Name',
-                    border: OutlineInputBorder(),
+      body: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            colors: [Colors.blue.shade50, Colors.blue.shade100],
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+          ),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Form(
+            key: _formKey,
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  // Task Name
+                  _buildInputField(
+                    controller: _nameController,
+                    label: 'Task Name',
+                    icon: Icons.task,
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Task name is required';
+                      }
+                      return null;
+                    },
                   ),
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Task name is required';
-                    }
-                    return null;
-                  },
-                ),
-                SizedBox(height: 20),
+                  SizedBox(height: 20),
 
-                // Task Description
-                TextFormField(
-                  controller: _descriptionController,
-                  decoration: InputDecoration(
-                    labelText: 'Description',
-                    border: OutlineInputBorder(),
+                  // Task Description
+                  _buildInputField(
+                    controller: _descriptionController,
+                    label: 'Description',
+                    icon: Icons.description,
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Description is required';
+                      }
+                      return null;
+                    },
                   ),
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Description is required';
-                    }
-                    return null;
-                  },
-                ),
-                SizedBox(height: 20),
+                  SizedBox(height: 20),
 
-                // Commencement Date
-                InkWell(
-                  onTap: _pickCommencementDate,
-                  child: InputDecorator(
-                    decoration: InputDecoration(
-                      labelText: 'Commencement Date',
-                      border: OutlineInputBorder(),
+                  // Commencement Date
+                  _buildDatePicker(
+                    label: 'Commencement Date',
+                    value: _commencementDate != null
+                        ? DateFormat('yyyy-MM-dd').format(_commencementDate!)
+                        : 'Select Date',
+                    onTap: _pickCommencementDate,
+                  ),
+                  SizedBox(height: 20),
+
+                  // Due Date
+                  _buildDatePicker(
+                    label: 'Due Date',
+                    value: _dueDate != null
+                        ? DateFormat('yyyy-MM-dd').format(_dueDate!)
+                        : 'Select Date',
+                    onTap: _pickDueDate,
+                  ),
+                  SizedBox(height: 20),
+
+                  // Assigned To
+                  _buildInputField(
+                    controller: _assignedToController,
+                    label: 'Assigned To',
+                    icon: Icons.person,
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Assigned To is required';
+                      }
+                      return null;
+                    },
+                  ),
+                  SizedBox(height: 20),
+
+                  // Client Name
+                  _buildInputField(
+                    controller: _clientNameController,
+                    label: 'Client Name',
+                    icon: Icons.person_outline,
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Client Name is required';
+                      }
+                      return null;
+                    },
+                  ),
+                  SizedBox(height: 20),
+
+                  // Client Details Section
+                  Text(
+                    'Client Details',
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.blue.shade700,
                     ),
-                    child: Text(
-                      _commencementDate != null
-                          ? DateFormat('yyyy-MM-dd').format(_commencementDate!)
-                          : 'Select Date',
-                    ),
                   ),
-                ),
-                SizedBox(height: 20),
+                  SizedBox(height: 10),
 
-                // Due Date
-                InkWell(
-                  onTap: _pickDueDate,
-                  child: InputDecorator(
-                    decoration: InputDecoration(
-                      labelText: 'Due Date',
-                      border: OutlineInputBorder(),
-                    ),
-                    child: Text(
-                      _dueDate != null
-                          ? DateFormat('yyyy-MM-dd').format(_dueDate!)
-                          : 'Select Date',
-                    ),
+                  // Client Designation
+                  _buildInputField(
+                    controller: _clientDesignationController,
+                    label: 'Designation',
+                    icon: Icons.work,
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Designation is required';
+                      }
+                      return null;
+                    },
                   ),
-                ),
-                SizedBox(height: 20),
+                  SizedBox(height: 10),
 
-                // Assigned To
-                TextFormField(
-                  controller: _assignedToController,
-                  decoration: InputDecoration(
-                    labelText: 'Assigned To',
-                    border: OutlineInputBorder(),
+                  // Client Email
+                  _buildInputField(
+                    controller: _clientEmailController,
+                    label: 'Email',
+                    icon: Icons.email,
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Email is required';
+                      }
+                      if (!RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$').hasMatch(value)) {
+                        return 'Invalid email address';
+                      }
+                      return null;
+                    },
                   ),
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Assigned To is required';
-                    }
-                    return null;
-                  },
-                ),
-                SizedBox(height: 20),
+                  SizedBox(height: 20),
 
-                // Client Name
-                TextFormField(
-                  controller: _clientNameController,
-                  decoration: InputDecoration(
-                    labelText: 'Client Name',
-                    border: OutlineInputBorder(),
-                  ),
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Client Name is required';
-                    }
-                    return null;
-                  },
-                ),
-                SizedBox(height: 20),
-
-                // Client Details Table
-                Text(
-                  'Client Details',
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                ),
-                SizedBox(height: 10),
-                TextFormField(
-                  controller: _clientDesignationController,
-                  decoration: InputDecoration(
-                    labelText: 'Designation',
-                    border: OutlineInputBorder(),
-                  ),
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Designation is required';
-                    }
-                    return null;
-                  },
-                ),
-                SizedBox(height: 10),
-                TextFormField(
-                  controller: _clientEmailController,
-                  decoration: InputDecoration(
-                    labelText: 'Email',
-                    border: OutlineInputBorder(),
-                  ),
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Email is required';
-                    }
-                    if (!RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$').hasMatch(value)) {
-                      return 'Invalid email address';
-                    }
-                    return null;
-                  },
-                ),
-                SizedBox(height: 20),
-
-                // Save Button
-                _isLoading
-                    ? CircularProgressIndicator()
-                    : ElevatedButton(
-                        onPressed: _saveTask,
-                        style: ElevatedButton.styleFrom(
-                          padding: EdgeInsets.symmetric(horizontal: 50, vertical: 15),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10),
+                  // Save Button
+                  _isLoading
+                      ? CircularProgressIndicator()
+                      : ElevatedButton(
+                          onPressed: _saveTask,
+                          style: ElevatedButton.styleFrom(
+                            padding: EdgeInsets.symmetric(horizontal: 50, vertical: 15),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            backgroundColor: Colors.blue.shade700,
+                            elevation: 5,
+                          ),
+                          child: Text(
+                            'Save Task',
+                            style: TextStyle(fontSize: 16, color: Colors.white),
                           ),
                         ),
-                        child: Text('Save Task'),
-                      ),
-              ],
+                ],
+              ),
             ),
           ),
+        ),
+      ),
+    );
+  }
+
+  // Helper method to build input fields
+  Widget _buildInputField({
+    required TextEditingController controller,
+    required String label,
+    required IconData icon,
+    required String? Function(String?)? validator,
+  }) {
+    return TextFormField(
+      controller: controller,
+      decoration: InputDecoration(
+        labelText: label,
+        prefixIcon: Icon(icon, color: Colors.blue.shade700),
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(10),
+          borderSide: BorderSide(color: Colors.blue.shade700),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(10),
+          borderSide: BorderSide(color: Colors.blue.shade700, width: 2),
+        ),
+      ),
+      validator: validator,
+    );
+  }
+
+  // Helper method to build date picker fields
+  Widget _buildDatePicker({
+    required String label,
+    required String value,
+    required VoidCallback onTap,
+  }) {
+    return InkWell(
+      onTap: onTap,
+      child: InputDecorator(
+        decoration: InputDecoration(
+          labelText: label,
+          prefixIcon: Icon(Icons.calendar_today, color: Colors.blue.shade700),
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10),
+            borderSide: BorderSide(color: Colors.blue.shade700),
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10),
+            borderSide: BorderSide(color: Colors.blue.shade700, width: 2),
+          ),
+        ),
+        child: Text(
+          value,
+          style: TextStyle(fontSize: 16, color: Colors.blue.shade700),
         ),
       ),
     );
